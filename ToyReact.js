@@ -25,6 +25,18 @@ class TextWrapper {
     parent.append(this.root);
   }
 }
+
+export class Component {
+  setAttribute(name, value) {
+    this[name] = value;
+  }
+  mountTo(parent) {
+    //   获取vdom
+    let vdom = this.render();
+    // 把虚拟dom挂在到父亲
+    vdom.mountTo(parent);
+  }
+}
 let ToyReact = {
   createElement: function (type, attributes, ...children) {
     let element;

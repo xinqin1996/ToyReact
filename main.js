@@ -1,6 +1,6 @@
-import ToyReact from "./ToyReact";
+import ToyReact, { Component } from "./ToyReact";
 
-class MyComponent {
+class MyComponent extends Component {
   render() {
     return (
       <div>
@@ -9,15 +9,6 @@ class MyComponent {
         <span>!</span>
       </div>
     );
-  }
-  setAttribute(name, value) {
-    this[name] = value;
-  }
-  mountTo(parent) {
-    //   获取vdom
-    let vdom = this.render();
-    // 把虚拟dom挂在到父亲
-    vdom.mountTo(parent);
   }
 }
 const a = <MyComponent name="tony"></MyComponent>;
