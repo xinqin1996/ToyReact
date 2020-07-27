@@ -2,7 +2,13 @@ import ToyReact from "./ToyReact";
 
 class MyComponent {
   render() {
-    return <div>cool</div>;
+    return (
+      <div>
+        <span>hello</span>
+        <span>world</span>
+        <span>!</span>
+      </div>
+    );
   }
   setAttribute(name, value) {
     this[name] = value;
