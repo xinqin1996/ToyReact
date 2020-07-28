@@ -27,6 +27,9 @@ class TextWrapper {
 }
 
 export class Component {
+  constructor() {
+    this.children = [];
+  }
   setAttribute(name, value) {
     this[name] = value;
   }
@@ -35,6 +38,10 @@ export class Component {
     let vdom = this.render();
     // 把虚拟dom挂在到父亲
     vdom.mountTo(parent);
+  }
+
+  appendChild(vchild) {
+    this.children.push(vchild);
   }
 }
 let ToyReact = {
@@ -51,13 +58,31 @@ let ToyReact = {
         element.setAttribute(key, attributes[key]);
       }
     }
-    for (const child of children) {
-      if (typeof child === "string") {
-        child = new TextWrapper(child);
-        // child = document.createTextNode(child);
+    // 递归用来出来 类组件的children， 传进来的this.children是数组，需要展开
+    let insertChildren = (children) => {
+      for (const child of children) {
+        if (typeof child === "object" && child instanceof Array) {
+          // 递归展开
+          insertChildren(child);
+          // child = document.createTextNode(child);
+        } else {
+          //可以处理 {true}这种元素
+          if (
+            !(child instanceof Component) &&
+            !(child instanceof ElementWrapper) &&
+            !(child instanceof TextWrapper)
+          ) {
+            child = String(child);
+          }
+          if (typeof child === "string") {
+            child = new TextWrapper(child);
+            // child = document.createTextNode(child);
+          }
+          element.appendChild(child);
+        }
       }
-      element.appendChild(child);
-    }
+    };
+    insertChildren(children);
     // 返回一个实dom
     return element;
   },
