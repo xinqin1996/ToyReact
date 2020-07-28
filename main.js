@@ -2,7 +2,16 @@ import ToyReact, { Component } from "./ToyReact";
 
 class Square extends Component {
   render() {
-    return <button className="square">{this.props.value}</button>;
+    return (
+      <button
+        className="square"
+        onClick={() => {
+          alert(this.props.value);
+        }}
+      >
+        {this.props.value}
+      </button>
+    );
   }
 }
 class Board extends Component {

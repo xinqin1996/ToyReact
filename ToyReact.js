@@ -4,6 +4,13 @@ class ElementWrapper {
     this.root = document.createElement(type);
   }
   setAttribute(name, value) {
+    if (name.match(/^on([\s\S]+)$/)) {
+      const eventName = RegExp.$1.replace(/^[\s\S]/, (s) => s.toLowerCase());
+      this.root.addEventListener(eventName, value);
+    }
+    if (name === "className") {
+      name = "class";
+    }
     this.root.setAttribute(name, value);
   }
   //   这里不是真的child，而是一个虚拟的child
