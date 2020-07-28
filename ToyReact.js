@@ -11,7 +11,7 @@ class ElementWrapper {
     vchild.mountTo(this.root);
   }
   mountTo(parent) {
-    parent.append(this.root);
+    parent.appendChild(this.root);
   }
 }
 
@@ -22,7 +22,7 @@ class TextWrapper {
   }
 
   mountTo(parent) {
-    parent.append(this.root);
+    parent.appendChild(this.root);
   }
 }
 

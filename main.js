@@ -2,6 +2,7 @@ import ToyReact, { Component } from "./ToyReact";
 
 class MyComponent extends Component {
   render() {
+    console.log(this);
     return (
       <div>
         <span>hello</span>
@@ -11,7 +12,11 @@ class MyComponent extends Component {
     );
   }
 }
-const a = <MyComponent name="tony"></MyComponent>;
+const a = (
+  <MyComponent name="tony">
+    <div>ddd</div>
+  </MyComponent>
+);
 
 ToyReact.render(a, document.getElementById("root"));
 
